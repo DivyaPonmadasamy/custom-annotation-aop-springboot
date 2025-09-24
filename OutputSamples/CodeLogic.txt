@@ -1,0 +1,26 @@
+To work with custom annotations using AOP...
+
+Two types of custom annotations
+1. field level (DBField.java)
+2. method level (TrackExecutionTime.java)
+
+Configured AOP in 3 ways:
+1. using java configuration file 
+   For configuration: CustomConfig.java
+   For AOP logic: ExecTimeAspect.java (advice methods WITH annotations)
+
+   Execute lines 17 through 54 in CustomdemoApplication.java
+
+2. using xml configuration file (manual mapping)
+   For configuration: config.xml in resources
+   For AOP logic: ExecTimeAspectXml.java (advice methods WITHOUT annotations)
+
+   Execute lines 58 through 74 (excluding 63) in CustomdemoApplication.java
+   
+3. using xml configuration file (auto mapping with the annotations)
+   For configuration: autoconfig.xml in resources
+   For AOP logic: ExecTimeAspect.java (advice methods WITH annotations)
+
+   Execute lines 58 through 74 (excluding 61) in CustomdemoApplication.java
+
+Custom Annotation's implementation: User.java (implemented both Field-level and Method-level)

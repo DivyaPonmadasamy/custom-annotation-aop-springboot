@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+    
+<!-- Manual configuration file -->
+<!-- Manually creating beans and wiring AOP advices -->
+<!-- ExecTimeAspectXml.java file is used to write methods for the advices -->
+
+    <!-- aspect as bean -->
+    <bean id="execasp" class="com.customannotations.customdemo.ExecTimeAspectXml"></bean>
+
+    <aop:config>
+        <aop:aspect ref="execasp">
+            <!-- point cut -->
+            <aop:pointcut id="myPointcut" expression="@annotation(com.customannotations.customdemo.TrackExecutionTime)"/>
+
+            <!-- advices -->
+            <aop:around method="myAroundAdvice" pointcut-ref="myPointcut"/>
+            <aop:before method="myBeforeAdvice" pointcut-ref="myPointcut"/>
+            <aop:after-returning method="myAfterReturn" returning="result" pointcut-ref="myPointcut"/>
+            <aop:after-throwing method="myAfterThrow" throwing="error" pointcut-ref="myPointcut"/>
+            <aop:after method="myAfterAdvice" pointcut-ref="myPointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!-- target bean that uses the custom annotation -->
+    <bean id="user" class="com.customannotations.customdemo.User"/>
+
+</beans>
